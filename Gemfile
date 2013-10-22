@@ -1,8 +1,15 @@
 source "https://rubygems.org"
 
 gem 'sinatra'
-gem 'shotgun'
+gem 'pg'
+gem 'sinatra-activerecord'
 
-gem 'rspec'
-gem 'capybara'
-gem 'jasmine'
+
+group :development, :test do
+  gem 'sqlite3'
+  gem 'rspec'
+  gem 'capybara'
+  gem 'jasmine'
+  gem 'shotgun'
+  gem 'dotenv'
+end
