@@ -1,0 +1,19 @@
+
+nav
+{ padding: 5px;
+  background-color:grey;
+  overflow: hidden;
+}
+
+nav ul
+{
+  float: right;
+}
+
+nav li
+{
+  display: inline-block;
+  list-style-type:none;
+  margin-right: 30px;
+  padding:0;
+}
