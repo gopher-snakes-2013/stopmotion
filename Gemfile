@@ -6,6 +6,8 @@ gem 'sinatra-activerecord'
 gem 'omniauth-twitter'
 gem 'twitter'
 gem 'omniauth'
+gem 'nokogiri'
+gem 'open-uri'
 
 group :development, :test do
   gem 'sqlite3'
