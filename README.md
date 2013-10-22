@@ -3,7 +3,7 @@ StopMotion
 
 A real-time bus route notification app for users big and small.
 
-#Release 1
+##Release 1
 * User can view home page
 * Unregistered user can sign up as a registered user
 * Registered user can sign in to app
