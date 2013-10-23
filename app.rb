@@ -5,6 +5,9 @@ require 'sinatra'
 require 'active_record'
 require './environment'
 require 'omniauth-twitter'
+require 'dotenv'
+
+Dotenv.load
 
 set :database, ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'] || "sqlite3:///db/poodles.db")
 enable :sessions
@@ -22,16 +25,19 @@ end
 get '/auth/twitter/callback' do
   session[:token] = env['omniauth.auth'].credentials.token
   session[:secret] = env['omniauth.auth'].credentials.secret
-
-  erb :index
+  redirect '/'
+  # erb :index
 end
 
+get '/map' do
+
+  erb :map
+end
 
 get '/predict' do 
   @next_arrival = predict_n_montogomery
   erb :predict
 end
-
 
 def predict_n_montogomery
   predictions = Nokogiri::XML(open('http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=sf-muni&r=N&s=6994'))
