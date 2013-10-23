@@ -4,28 +4,28 @@ var map;
 
 function initialize() {
   var mapOptions = {
-    zoom: 6,
+    zoom: 15,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   map = new google.maps.Map(document.getElementById('map-canvas'),
-      mapOptions);
+    mapOptions);
 
   // Try HTML5 geolocation
   if(navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = new google.maps.LatLng(position.coords.latitude,
-                                       position.coords.longitude);
+       position.coords.longitude);
 
-      var infowindow = new google.maps.InfoWindow({
-        map: map,
-        position: pos,
-        content: 'Location found using HTML5.'
-      });
+      // var infowindow = new google.maps.InfoWindow({
+      //   map: map,
+      //   position: pos,
+      //   content: 'Location found using HTML5.'
+      // });
 
-      map.setCenter(pos);
-    }, function() {
-      handleNoGeolocation(true);
-    });
+    map.setCenter(pos);
+  }, function() {
+    handleNoGeolocation(true);
+  });
   } else {
     // Browser doesn't support Geolocation
     handleNoGeolocation(false);
@@ -41,9 +41,16 @@ function handleNoGeolocation(errorFlag) {
 
   var options = {
     map: map,
-    position: new google.maps.LatLng(60, 105),
+    position: new google.maps.LatLng(37.792828, -122.402782),
     content: content
   };
+
+  var marker = new google.maps.Marker({
+    position: new google.maps.LatLng(position.coords.latitude,
+     position.coords.longitude),
+    map: map,
+    title: 'Hello World!'
+  });
 
   var infowindow = new google.maps.InfoWindow(options);
   map.setCenter(options.position);
