@@ -17,6 +17,16 @@ get '/' do
   erb :index
 end
 
+get '/predict' do 
+  @stop = params[:stop]
+  @next_arrival = minutes_until_next_arrival("N",@stop)
+  @stop = get_stop_title(@stop)
+  erb :predict
+end
+
+get '/update' do 
+  minutes_until_next_arrival("N", "6994")
+end  
 
 use OmniAuth::Builder do
   provider :twitter, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']
@@ -26,24 +36,23 @@ get '/auth/twitter/callback' do
   session[:token] = env['omniauth.auth'].credentials.token
   session[:secret] = env['omniauth.auth'].credentials.secret
   redirect '/'
-  # erb :index
 end
 
-get '/map' do
 
+get '/map' do
   erb :map
 end
 
-get '/predict' do 
-  @next_arrival = predict_n_montogomery
-  erb :predict
-end
-
-def predict_n_montogomery
-  predictions = Nokogiri::XML(open('http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=sf-muni&r=N&s=6994'))
+def minutes_until_next_arrival(line, stop)
+  predictions = Nokogiri::XML(open("http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=sf-muni&r=N&s=#{stop}"))
   prediction_nodes = predictions.xpath('.//prediction')
   prediction_minutes = prediction_nodes.map {|prediction| prediction[:minutes]}
   prediction_minutes[0]
 end
 
+
+def get_stop_title(stop_tag)
+  @stop_tags_and_titles = {"6994" => "Montgomery" ,"6995" => "Powell" ,"7217" => "Embarcadero"}
+  @stop_tags_and_titles[stop_tag]
+end
 

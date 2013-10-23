@@ -7,7 +7,6 @@ gem 'omniauth-twitter'
 gem 'twitter'
 gem 'omniauth'
 gem 'nokogiri'
-gem 'open-uri'
 
 group :development, :test do
   gem 'sqlite3'
@@ -16,4 +15,6 @@ group :development, :test do
   gem 'jasmine'
   gem 'shotgun'
   gem 'dotenv'
+  gem 'debugger'
 end
+

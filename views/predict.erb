@@ -1,14 +1,26 @@
-<table>
-  <tr>
-    <th>Line</th>
-    <th>Direction</th>
-    <th>Stop</th>
-    <th>Next Arrival</th>
-  </tr>
-  <tr>
-    <td>N Judah</td>
-    <td>Inbound</td>
-    <td>Montgomery</td>
-    <td><%= @next_arrival %></td>
-  </tr>
-</table>
+
+<form method="get" action="/predict">
+  <select name="stop">
+    <option value="7217">Embarcadero</option>
+    <option value="6994" selected>Montgomery</option>
+    <option value="6995">Powell</option>
+  </select>
+  <button>Update!</button>
+</form>
+
+<% if @stop %>
+  <table>
+    <tr>
+      <th>Line</th>
+      <th>Direction</th>
+      <th>Stop</th>
+      <th>Next Arrival</th>
+    </tr>
+    <tr>
+      <td>N Judah</td>
+      <td>Outbound</td>
+      <td><%= @stop %></td>
+      <td><%= @next_arrival %></td>
+    </tr>
+  </table>
+<% end %>
