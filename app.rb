@@ -28,11 +28,6 @@ def minutes_until_next_arrival(line, stop)
   prediction_minutes[0]
 end
 
-def get_stop_for_line(line)
-
-end
-
-
 def get_stop_title(stop_tag)
   @stop_tags_and_titles = {"6994" => "Montgomery" ,"6995" => "Powell" ,"7217" => "Embarcadero"}
   @stop_tags_and_titles[stop_tag]

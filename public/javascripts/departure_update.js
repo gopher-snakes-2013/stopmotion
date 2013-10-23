@@ -1,18 +1,11 @@
 $(document).ready(function(){
-  console.log("loaded here");
-  var ajax_update = $.ajax({
+    setInterval(update_minutes_until_arrival, 15000);
+});
+
+var update_minutes_until_arrival = function(){
+  $.ajax({
     url: "/update"
   }).done(function(response){
-    // $('tr').eq(3).html(response);
-    console.log(response);
+  $('td').eq(3).html(response);
   });
-
-  // var flag = 0
-  // function update_departure_time (){
-  //   console.log(flag);
-  //   flag +=1
-  // }
-
-  setInterval(ajax_update, 3000);
-
-});
+};
