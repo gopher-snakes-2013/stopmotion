@@ -13,7 +13,8 @@ get '/predict' do
   erb :predict
 end
 
-post '/predict' do 
+get '/update' do 
+  minutes_until_next_arrival("N", "6994")
 end  
 
 
