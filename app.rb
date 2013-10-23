@@ -46,3 +46,4 @@ def predict_n_montogomery
   prediction_minutes[0]
 end
 
+
