@@ -6,12 +6,16 @@ require 'active_record'
 require './environment'
 require 'omniauth-twitter'
 require 'dotenv'
+require_relative './models/user'
 
 Dotenv.load
 
-set :database, ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'] || "sqlite3:///db/poodles.db")
+set :database, ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'] || "sqlite3:///db/stopmotion.db")
 enable :sessions
 
+use OmniAuth::Builder do
+  provider :twitter, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']
+end
 
 get '/' do
   erb :index
@@ -21,15 +25,22 @@ get '/predict' do
   @stop = params[:stop]
   @next_arrival = minutes_until_next_arrival("N",@stop)
   @stop = get_stop_title(@stop)
-  erb :predict
+  erb :index
 end
 
 get '/update' do 
   minutes_until_next_arrival("N", "6994")
-end  
+end
 
-use OmniAuth::Builder do
-  provider :twitter, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']
+get '/sign_up' do
+  erb :sign_up
+end
+
+post '/sign_up' do
+  u = User.new(params[:user])
+  u.password = params[:password]
+  u.save!
+  redirect('/')
 end
 
 get '/auth/twitter/callback' do
