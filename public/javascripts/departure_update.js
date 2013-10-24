@@ -6,6 +6,6 @@ var update_minutes_until_arrival = function(){
   $.ajax({
     url: "/update"
   }).done(function(response){
-  $('td').eq(3).html(response);
+  $('td').eq(1).html(response);
   });
 };

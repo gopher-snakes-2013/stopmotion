@@ -12,33 +12,32 @@
 
   <div>
     <a href='/auth/twitter'><button type="button">Login with Twitter</button></a>
-  </div>   
+  </div>
 
-  <form method="get" action="/predict">
+<!--   <form method="get" action="/predict">
     <select name="stop">
       <option value="7217">Embarcadero</option>
       <option value="6994" selected>Montgomery</option>
       <option value="6995">Powell</option>
     </select>
     <button>Update!</button>
-  </form>
+  </form> -->
 
-  <% if @stop %>
+
     <table>
       <tr>
         <th>Line</th>
-        <th>Direction</th>
-        <th>Stop</th>
-        <th>Next Arrival</th>
+        <th>Arrival 1</th>
+        <th>Arrival 2</th>
       </tr>
+      <% @train_info.each do |train| %>
       <tr>
-        <td>N Judah</td>
-        <td>Outbound</td>
-        <td><%= @stop %></td>
-        <td><%= @next_arrival %></td>
+        <td><%= train.route %></td>
+        <td><%= train.arrival1 %></td>
+        <td><%= train.arrival2 %></td>
       </tr>
+      <% end %>
     </table>
-  <% end %>
-  
+
 
 </body>
