@@ -7,6 +7,9 @@ require './environment'
 require 'omniauth-twitter'
 require 'dotenv'
 require_relative './models/user'
+require './helper'
+
+include NextBusInterface
 
 Dotenv.load
 
@@ -22,15 +25,8 @@ get '/' do
   erb :index
 end
 
-# get '/predict' do
-#   @stop = params[:stop]
-#   @next_arrival = minutes_until_next_arrival("N",@stop)
-#   @stop = get_stop_title(@stop)
-#   erb :index
-# end
-
 get '/update' do
-  minutes_until_next_arrival("N", "6994")
+  next_n_arrivals("N", "6994", 1)
 end
 
 get '/sign_up' do
@@ -50,43 +46,12 @@ get '/auth/twitter/callback' do
   redirect '/'
 end
 
-
 get '/map' do
   erb :map
 end
 
-def minutes_until_next_arrival(line, stop)
-  predictions = Nokogiri::XML(open("http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=sf-muni&r=N&s=#{stop}"))
-  prediction_nodes = predictions.xpath('.//prediction')
-  prediction_minutes = prediction_nodes.map {|prediction| prediction[:minutes]}
-  prediction_minutes[0]
-end
 
 
-def get_stop_title(stop_tag)
-  @stop_tags_and_titles = {"6994" => "Montgomery" ,"6995" => "Powell" ,"7217" => "Embarcadero"}
-  @stop_tags_and_titles[stop_tag]
-end
 
-def outbound_trains
-  ["N","L","J","M","KT"].map {|line| train_stop_next_two_arrivals(line,"6994")}
-end
-
-class Train
-  attr_reader :route, :arrival1, :arrival2
-
-  def initialize(route,arrival1, arrival2)
-    @route = route
-    @arrival1 = arrival1
-    @arrival2 = arrival2
-  end
-end
-
-def train_stop_next_two_arrivals(line, stop)
-    predictions = Nokogiri::XML(open("http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=sf-muni&r=#{line}&s=#{stop}"))
-    prediction_nodes = predictions.xpath('.//prediction')
-    prediction_minutes = prediction_nodes.map {|prediction| prediction[:minutes]}
-    Train.new(line, prediction_minutes[0],prediction_minutes[1])
-end
 
 
