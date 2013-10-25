@@ -45,13 +45,3 @@ get '/auth/twitter/callback' do
   session[:secret] = env['omniauth.auth'].credentials.secret
   redirect '/'
 end
-
-get '/map' do
-  erb :map
-end
-
-
-
-
-
-
