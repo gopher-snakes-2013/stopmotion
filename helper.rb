@@ -21,7 +21,7 @@ class Route
 end
 
 def muni_train_lines
-  ["N","L","J","M","KT"]
+  ["J","KT","L","M","N"]
 end
 
 def next_n_arrivals(line,stop,n)
@@ -35,3 +35,9 @@ def outbound_trains
   end
 end
 
+def outbound_trains_json
+  updated_info_all_outbound = {}
+  outbound_trains.each do |route|
+    updated_info_all_outbound[route.route] = [route.arrival1,route.arrival2]
+  end
+end
