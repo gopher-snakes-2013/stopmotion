@@ -26,7 +26,7 @@ get '/' do
 end
 
 get '/update' do
-  next_n_arrivals("N", "6994", 1)
+  outbound_trains_json.to_json
 end
 
 get '/sign_up' do
