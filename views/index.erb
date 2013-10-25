@@ -4,7 +4,6 @@
 <body>
 <h1>StopMotion</h1>
 
-
   <form method="post" action="/">
     Email: <input type="text" name="email">
     Password: <input type="password" name="password">
@@ -13,16 +12,6 @@
   <div>
     <a href='/auth/twitter'><button type="button">Login with Twitter</button></a>
   </div>
-
-<!--   <form method="get" action="/predict">
-    <select name="stop">
-      <option value="7217">Embarcadero</option>
-      <option value="6994" selected>Montgomery</option>
-      <option value="6995">Powell</option>
-    </select>
-    <button>Update!</button>
-  </form> -->
-
 
     <table>
       <tr>
@@ -39,5 +28,6 @@
       <% end %>
     </table>
 
+    <div id="map-canvas"></div>
 
 </body>
