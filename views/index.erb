@@ -1,33 +1,35 @@
 <head>
 </head>
 
-<body>
 <h1>StopMotion</h1>
 
-  <form method="post" action="/">
-    Email: <input type="text" name="email">
-    Password: <input type="password" name="password">
-  </form>
+<body>
+  <div class="container"> 
+    <div class="left col">
+     
+      <div>
+        <a href='/auth/twitter'><button type="button">Login with Twitter</button></a>
+      </div>
 
-  <div>
-    <a href='/auth/twitter'><button type="button">Login with Twitter</button></a>
+        <table>
+          <tr>
+            <th>Line</th>
+            <th>Arrival 1</th>
+            <th>Arrival 2</th>
+          </tr>
+          <% @train_info.each do |train| %>
+          <tr>
+            <td><%= train.route %></td>
+            <td><%= train.arrival1 %></td>
+            <td><%= train.arrival2 %></td>
+          </tr>
+          <% end %>
+        </table>
+    </div>
+
+    <div class="right col">
+      <div id="map-canvas"></div>
+    </div>
+
   </div>
-
-    <table>
-      <tr>
-        <th>Line</th>
-        <th>Arrival 1</th>
-        <th>Arrival 2</th>
-      </tr>
-      <% @train_info.each do |train| %>
-      <tr>
-        <td><%= train.route %></td>
-        <td><%= train.arrival1 %></td>
-        <td><%= train.arrival2 %></td>
-      </tr>
-      <% end %>
-    </table>
-
-    <div id="map-canvas"></div>
-
 </body>

@@ -34,3 +34,4 @@ def outbound_trains
     Route.new(line,arrivals[0],arrivals[1])
   end
 end
+

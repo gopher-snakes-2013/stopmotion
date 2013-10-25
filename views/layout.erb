@@ -7,10 +7,20 @@
 <body>
 <nav>
   <ul>
-    <li><a href='/'>Timetable</a></li>
-    <li><a href='#'>Profile</a></li>
-    <li><a href='/sign_up'>Sign Up</a></li>
-    <li><a href='#'>Sign In</a></li>
+    <% if current_user %>
+      <div>Welcome, <%= current_user.email %></div>
+    <% else %> <div>Please sign in!</div>
+    <% end %>
+    <form method="post" action="/sign_up">
+      Email: <input type="text" name="user[email]">
+      Password: <input type="password" name="user[password]">
+      <button>Sign Up</button><br>
+    </form>
+    <form method="post" action="/sign_in">
+      Email: <input type="text" name="user[email]">
+      Password: <input type="password" name="user[password]">
+      <button>Sign In</button></a>
+    </form>
   </ul>
 </nav>
 

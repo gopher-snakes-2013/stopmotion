@@ -11,6 +11,12 @@ require './helper'
 
 include NextBusInterface
 
+helpers do
+  def current_user
+    @current_user ||= User.find(session[:id]) if session[:id]
+  end
+end
+
 Dotenv.load
 
 set :database, ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'] || "sqlite3:///db/stopmotion.db")
@@ -36,7 +42,16 @@ end
 post '/sign_up' do
   u = User.new(params[:user])
   u.password = params[:password]
+  session[:id] = u.id
   u.save!
+  redirect('/')
+end
+
+post '/sign_in' do
+  user = User.find_by_email(params[:email])
+  if user.password == params[:password]
+    session[:id] = user.id
+  end
   redirect('/')
 end
 
