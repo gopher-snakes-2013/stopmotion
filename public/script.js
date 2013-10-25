@@ -41,7 +41,7 @@ function handleNoGeolocation(errorFlag) {
 
   var options = {
     map: map,
-    position: new google.maps.LatLng(37.792828, -122.402782),
+    position: new google.maps.LatLng(37.789231, -122.401411),
     content: content
   };
 
