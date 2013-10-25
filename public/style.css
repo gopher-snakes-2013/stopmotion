@@ -16,3 +16,10 @@ nav li
   margin-right: 30px;
   padding:0;
 }
+
+#map-canvas {
+        height: 400px;
+        width: 400px;
+        margin: 0px;
+        padding: 0px
+      }
